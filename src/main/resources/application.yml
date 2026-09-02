@@ -1,0 +1,30 @@
+spring:
+  application:
+    name: deepcare
+  datasource:
+    url: ${DEEPCARE_DB_URL:jdbc:mysql://localhost:3306/deepcare?useUnicode=true&characterEncoding=utf8&serverTimezone=Asia/Shanghai&useSSL=false&allowPublicKeyRetrieval=true}
+    username: ${DEEPCARE_DB_USERNAME:deepcare}
+    password: ${DEEPCARE_DB_PASSWORD:deepcare123}
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  sql:
+    init:
+      mode: never
+
+server:
+  port: ${DEEPCARE_PORT:8080}
+
+mybatis-plus:
+  configuration:
+    map-underscore-to-camel-case: true
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+  global-config:
+    db-config:
+      id-type: auto
+      logic-delete-value: 1
+      logic-not-delete-value: 0
+
+# 仅保留 Spring AI 核心能力；接入具体模型时通过 provider starter 和环境变量配置密钥。
+spring.ai:
+  chat:
+    client:
+      enabled: false
